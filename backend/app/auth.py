@@ -1,16 +1,16 @@
 from fastapi import Depends, HTTPException, status
 from jose import jwt, JWTError
-from passlib.hash import bcrypt
+import bcrypt
 from datetime import datetime, timedelta
 
 SECRET_KEY = "SUPERSECRET"
 ALGORITHM = "HS256"
 
 def hash_password(password: str) -> str:
-    return bcrypt.hash(password)
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 def verify_password(password: str, hashed: str) -> bool:
-    return bcrypt.verify(password, hashed)
+    return bcrypt.checkpw(password.encode(), hashed.encode())
 
 def create_token(user_id: int):
     expire = datetime.utcnow() + timedelta(hours=1)
