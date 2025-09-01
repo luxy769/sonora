@@ -30,7 +30,7 @@ const AlbumsList: React.FC = () => {
             </Typography>
             <Grid container spacing={3}>
                 {albums.map((album) => (
-                    <Grid item xs={12} sm={6} md={4} key={album.id}>
+                    <Grid xs={12} sm={6} md={4} key={album.id}>
                         <Card
                             sx={{
                                 background: 'rgba(40,44,80,0.60)',
@@ -47,7 +47,7 @@ const AlbumsList: React.FC = () => {
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={album.cover_url ? `http://127.0.0.1:8001${album.cover_url}` : '/media/covers/placeholder.jpg'}
+                                image={album.cover_url ? `http://localhost:8001${album.cover_url}` : '/media/covers/placeholder.jpg'}
                                 alt={album.title}
                                 sx={{ objectFit: 'cover' }}
                             />

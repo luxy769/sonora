@@ -30,7 +30,7 @@ const PlaylistsList: React.FC = () => {
             </Typography>
             <Grid container spacing={3}>
                 {playlists.map((playlist) => (
-                    <Grid item xs={12} sm={6} md={4} key={playlist.id}>
+                    <Grid xs={12} sm={6} md={4} key={playlist.id}>
                         <Card
                             sx={{
                                 background: 'rgba(40,44,80,0.60)',
@@ -47,7 +47,7 @@ const PlaylistsList: React.FC = () => {
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={playlist.tracks[0]?.cover_url ? `http://127.0.0.1:8001${playlist.tracks[0].cover_url}` : '/media/covers/placeholder.jpg'}
+                                image={playlist.tracks[0]?.cover_url ? `http://localhost:8001${playlist.tracks[0].cover_url}` : '/media/covers/placeholder.jpg'}
                                 alt={playlist.title}
                                 sx={{ objectFit: 'cover' }}
                             />

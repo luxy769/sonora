@@ -13,7 +13,7 @@ import {
     Menu,
     MenuItem,
 } from '@mui/material';
-import { PlayArrow, Favorite, FavoriteBorder, MoreVert } from '@mui/icons-material';
+import { PlayArrow, MoreVert } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchTracks, setTrack } from '../store/slices/trackSlice';
 import { likeTrack, unlikeTrack, fetchLikedTracks } from '../store/slices/likesSlice';
@@ -147,7 +147,7 @@ const TrackList: React.FC = () => {
                         },
                     }}>
                         <Avatar
-                            src={track.cover_url ? `http://127.0.0.1:8001${track.cover_url}` : '/media/covers/placeholder.jpg'}
+                            src={track.cover_url ? `http://localhost:8001${track.cover_url}` : '/media/covers/placeholder.jpg'}
                             alt={track.title}
                             sx={{ width: 56, height: 56, mr: 2, boxShadow: '0 2px 8px 0 rgba(34,36,70,0.10)' }}
                         />

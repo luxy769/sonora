@@ -8,12 +8,16 @@ import {
     Typography,
     Button,
     IconButton,
+    Avatar,
+    Menu,
+    MenuItem,
 } from '@mui/material';
-import { MusicNote, PlaylistPlay, Album } from '@mui/icons-material';
+import { MusicNote, PlaylistPlay, Album, Logout, Person, CloudUpload } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { fetchTracks } from './store/slices/trackSlice';
 import { fetchAlbums } from './store/slices/albumsSlice';
 import { fetchPlaylists } from './store/slices/playlistsSlice';
+import { logout } from './store/slices/authSlice';
 import TrackList from './components/TrackList';
 import Auth from './components/Auth';
 import Player from './components/Player';
@@ -21,10 +25,12 @@ import PlaylistsList from './components/PlaylistsList';
 import AlbumsList from './components/AlbumsList';
 import PlaylistView from './components/PlaylistView';
 import AlbumView from './components/AlbumView';
+import UploadTrack from './components/UploadTrack';
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
     const { token } = useAppSelector((state) => state.auth);
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     useEffect(() => {
         void dispatch(fetchTracks());
@@ -33,6 +39,19 @@ const App: React.FC = () => {
             void dispatch(fetchPlaylists());
         }
     }, [dispatch, token]);
+
+    const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        handleMenuClose();
+    };
 
     return (
         <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1a1b4b 0%, #2a2d6e 100%)' }}>
@@ -76,7 +95,18 @@ const App: React.FC = () => {
                         >
                             Albums
                         </Button>
-                        {!token && (
+                        {token && (
+                            <Button
+                                component={Link}
+                                to="/upload"
+                                color="inherit"
+                                startIcon={<CloudUpload />}
+                                sx={{ mr: 2 }}
+                            >
+                                Upload
+                            </Button>
+                        )}
+                        {!token ? (
                             <Button
                                 component={Link}
                                 to="/login"
@@ -92,6 +122,35 @@ const App: React.FC = () => {
                             >
                                 Login
                             </Button>
+                        ) : (
+                            <>
+                                <IconButton
+                                    onClick={handleMenuOpen}
+                                    sx={{ color: '#fff', ml: 2 }}
+                                >
+                                    <Avatar sx={{ width: 32, height: 32, bgcolor: 'rgba(255,255,255,0.2)' }}>
+                                        <Person />
+                                    </Avatar>
+                                </IconButton>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleMenuClose}
+                                    PaperProps={{
+                                        sx: {
+                                            background: 'rgba(40,44,80,0.95)',
+                                            backdropFilter: 'blur(12px)',
+                                            border: '1px solid rgba(255,255,255,0.1)',
+                                            mt: 1,
+                                        }
+                                    }}
+                                >
+                                    <MenuItem onClick={handleLogout} sx={{ color: '#fff' }}>
+                                        <Logout sx={{ mr: 1 }} />
+                                        Logout
+                                    </MenuItem>
+                                </Menu>
+                            </>
                         )}
                     </Toolbar>
                 </AppBar>
@@ -119,6 +178,7 @@ const App: React.FC = () => {
                             <Route path="/playlists/:id" element={<PlaylistView />} />
                             <Route path="/albums" element={<AlbumsList />} />
                             <Route path="/albums/:id" element={<AlbumView />} />
+                            <Route path="/upload" element={<UploadTrack />} />
                             <Route path="/login" element={<Auth />} />
                         </Routes>
                     </Box>

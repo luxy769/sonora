@@ -27,7 +27,9 @@ export const register = createAsyncThunk(
     'auth/register',
     async (credentials: { username: string; password: string }) => {
         const response = await authAPI.register(credentials.username, credentials.password);
-        const token = response.access_token;
+        // После регистрации автоматически логинимся
+        const loginResponse = await authAPI.login(credentials.username, credentials.password);
+        const token = loginResponse.access_token;
         localStorage.setItem('token', token);
         return token;
     }

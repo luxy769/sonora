@@ -1,8 +1,7 @@
 import axios from 'axios';
-import type { Track } from '../types';
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8001',
+    baseURL: 'http://backend:8000',
     headers: {
         'Content-Type': 'application/json',
     },

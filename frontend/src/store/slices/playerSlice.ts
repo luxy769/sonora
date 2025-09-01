@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PlayerState, Track } from '../../types';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { PlayerState, Track } from '../../types';
 
 const initialState: PlayerState = {
     currentTrack: null,
