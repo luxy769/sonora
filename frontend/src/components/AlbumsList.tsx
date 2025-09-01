@@ -10,6 +10,7 @@ import {
     CircularProgress,
 } from '@mui/material';
 import { useAppSelector } from '../store/hooks';
+import { getCoverUrl } from '../utils/urls';
 
 const AlbumsList: React.FC = () => {
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ const AlbumsList: React.FC = () => {
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={album.cover_url ? `http://localhost:8001${album.cover_url}` : '/media/covers/placeholder.jpg'}
+                                image={getCoverUrl(album.cover_url)}
                                 alt={album.title}
                                 sx={{ objectFit: 'cover' }}
                             />

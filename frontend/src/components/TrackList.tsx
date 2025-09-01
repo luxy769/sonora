@@ -19,6 +19,7 @@ import { fetchTracks, setTrack } from '../store/slices/trackSlice';
 import { likeTrack, unlikeTrack, fetchLikedTracks } from '../store/slices/likesSlice';
 import { fetchPlaylists, addTrackToPlaylist, createPlaylist } from '../store/slices/playlistsSlice';
 import type { Track, Playlist } from '../types/index';
+import { getCoverUrl } from '../utils/urls';
 
 const TrackList: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -147,7 +148,7 @@ const TrackList: React.FC = () => {
                         },
                     }}>
                         <Avatar
-                            src={track.cover_url ? `http://localhost:8001${track.cover_url}` : '/media/covers/placeholder.jpg'}
+                            src={getCoverUrl(track.cover_url)}
                             alt={track.title}
                             sx={{ width: 56, height: 56, mr: 2, boxShadow: '0 2px 8px 0 rgba(34,36,70,0.10)' }}
                         />
