@@ -1,4 +1,6 @@
 # Sonora - Music Streaming Application
+![main](images/photo_2025-09-01_18-07-18.jpg)
+![reg](images/photo_2025-09-01_18-07-45.jpg)
 
 ## Структура проекта
 
