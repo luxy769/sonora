@@ -13,6 +13,7 @@ import {
     SkipPrevious,
 } from '@mui/icons-material';
 import { useAppSelector } from '../store/hooks';
+import { API_BASE_URL } from '../config';
 
 function Player() {
     const { currentTrack } = useAppSelector((state) => state.track);
@@ -88,7 +89,7 @@ function Player() {
         >
             <audio
                 ref={audioRef}
-                src={`http://127.0.0.1:8001/track/${currentTrack.id}`}
+                src={`${API_BASE_URL}/track/${currentTrack.id}`}
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
                 onEnded={() => setIsPlaying(false)}

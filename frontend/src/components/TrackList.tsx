@@ -169,7 +169,7 @@ const TrackList: React.FC = () => {
                             <IconButton
                                 edge="end"
                                 aria-label="play"
-                                onClick={() => handlePlay({ ...(track as any), file_path: (track as any).file_path || '', owner_id: (track as any).owner_id || 0 })}
+                                onClick={() => handlePlay(track)}
                                 sx={{ color: '#6e6cd8', background: 'rgba(255,255,255,0.10)', boxShadow: '0 2px 8px 0 rgba(34,36,70,0.10)', borderRadius: 2, '&:hover': { background: 'rgba(110,108,216,0.25)', color: '#fff' } }}
                             >
                                 <PlayArrow />
